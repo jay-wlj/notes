@@ -1,0 +1,7 @@
+一、有表test里product字段jsonb值如下
+  {"amount":12,"skus":[{"price":"12","stock":100,"id":1},{"price":"34","stock":100,"id":2}]}
+1、更改jsonb字段的名称(如将skus更改为model)
+  update test set product = product - 'skus' || jsonb_build_object('model', product->'skus');
+2、读取skus数组第一个对象的price值
+  select 'product'->'skus'->0->'price' from test;
+
